@@ -26,7 +26,7 @@ class Map extends React.Component {
 static getLastPosition = async (deviceId) => {
     // Replace with your actual API call to fetch the last position of a device
     const response = await fetch(
-        `https://connect.paj-gps.de/api/trackerdata/${deviceId}/last_points?lastPoints=`
+        `https://connect.paj-gps.de/api/trackerdata/${deviceId}/last_points?lastPoints=50`
 
     );
         return response;

@@ -1,12 +1,11 @@
 import React from 'react';
-import DeviceList from './components/DeviceList';
+import ReactDOM from 'react-dom';
+import './styles/tailwind.css';
+import App from './App';
 
-function App() {
-  return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <DeviceList/>
-    </div>
-  );
-}
-
-export default App;
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
