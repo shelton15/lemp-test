@@ -1,13 +1,42 @@
 import React, { useState } from 'react';
 
-const LoginForm = ({ onLogin }) => {
+const LoginForm = ({ onLogin, onSuccessLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     console.log('Form submitted');
-    onLogin(email, password);
+
+    try {
+      const response = await fetch('https://connect.paj-gps.de/api/login', {
+        method: 'POST',
+        body: JSON.stringify({ email, password }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('API response:', data); // Check the entire API response
+
+        // Extract the token from the response
+        if (data.token) {
+          const token = data.token;
+          console.log('Extracted token:', token); // Check the extracted token in the console
+          onSuccessLogin(); // Call the onSuccessLogin function
+        } else {
+          // Handle token not found error
+        }
+      } else {
+        console.error('Error logging in:', response.status);
+        // Handle login error
+      }
+    } catch (error) {
+      console.error('Error logging in:', error);
+      // Handle login error
+    }
   };
 
   return (
@@ -15,7 +44,7 @@ const LoginForm = ({ onLogin }) => {
       <div className="w-full max-w-xs">
         <form
           className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-          onSubmit={handleSubmit}
+          onSubmit={handleLogin}
         >
           <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
           <div className="mb-4">
