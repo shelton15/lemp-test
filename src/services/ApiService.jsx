@@ -1,4 +1,3 @@
-// import DeviceModel from '../models/DeviceModel';
 import React from 'react';
 import mapboxgl from 'mapbox-gl';
 
