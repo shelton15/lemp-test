@@ -1,5 +1,5 @@
 import React from 'react';
-import DeviceListItem from './components/DeviceListItems';
+import DeviceListItem from './DeviceListItems';
 
 const DeviceList = ({ devices, onDeviceClick }) => {
   const handleDeviceClick = (device) => {
