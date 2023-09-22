@@ -16,9 +16,11 @@ function App() {
         <h1>App</h1>
 
         <Routes>
-          <Route path="/" element={isLoggedIn ? <Navigate to="/devices" replace /> : <LoginForm onSuccessLogin={handleLogin} />} />
+          <Route path="/" element={isLoggedIn ? 
+            <Navigate replace to="/devices"/> : 
+              <LoginForm onSuccessLogin={handleLogin} />} />
 
-          <Route path="/devices" element={isLoggedIn ? <DeviceList /> : <Navigate to="/" replace />} />
+          <Route path="/devices" element={isLoggedIn ? <DeviceList /> : <Navigate replace to="/"/>} />
         </Routes>
       </div>
     </Router>
