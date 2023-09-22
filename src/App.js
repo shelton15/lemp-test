@@ -7,8 +7,6 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleLogin = () => {
-    // Perform login logic
-    // Set the isLoggedIn state to true upon successful login
     setIsLoggedIn(true);
   };
 
@@ -18,15 +16,9 @@ function App() {
         <h1>App</h1>
 
         <Routes>
-          <Route
-            path="/"
-            element={isLoggedIn ? <Navigate to="/devices" /> : <LoginForm onLogin={handleLogin} />}
-          />
+          <Route path="/" element={isLoggedIn ? <Navigate to="/devices" replace /> : <LoginForm onSuccessLogin={handleLogin} />} />
 
-          <Route
-            path="/devices"
-            element={isLoggedIn ? <DeviceList /> : <Navigate to="/" />}
-          />
+          <Route path="/devices" element={isLoggedIn ? <DeviceList /> : <Navigate to="/" replace />} />
         </Routes>
       </div>
     </Router>

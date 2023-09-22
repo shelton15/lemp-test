@@ -3,7 +3,7 @@ import DeviceListItem from './DeviceListItems';
 import Map from './Map';
 import axios from 'axios';
 
-const DevicePage = () => {
+const DeviceList = () => {
   const [devices, setDevices] = useState([]);
   const [token, setToken] = useState('');
 
@@ -65,4 +65,4 @@ const DevicePage = () => {
   );
 };
 
-export default DevicePage;
+export default DeviceList;
