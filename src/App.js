@@ -1,32 +1,36 @@
 import React, { useState } from 'react';
-import { Route, Navigate, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, useNavigate } from 'react-router-dom';
 import LoginForm from './components/LoginForm';
 import DeviceList from './components/DeviceList';
 
-const App = () => {
+function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
-  const handleSuccessLogin = () => {
+  const handleLogin = () => {
+    // Perform login logic
+    // Set the isLoggedIn state to true upon successful login
     setIsLoggedIn(true);
+    navigate('/devices'); // Navigate to the '/devices' route after successful login
   };
 
   return (
-  
+    <Router>
       <div>
-        {isLoggedIn ? (
-          <Navigate  replace to="/devices" />
-        ) : (
-          <LoginForm onSuccessLogin={handleSuccessLogin} />
-        )}
-        <Routes>
-          <Route exact path="/devices">
-            {isLoggedIn ? <DeviceList /> : <Navigate  replace to="/" />}
-          </Route>
-        </Routes>
-        
+        <h1>App</h1>
+
+        <Route exact path="/">
+          {isLoggedIn ? (
+            <Route path="/devices">
+              <DeviceList />
+            </Route>
+          ) : (
+            <LoginForm onLogin={handleLogin} />
+          )}
+        </Route>
       </div>
-    
+    </Router>
   );
-};
+}
 
 export default App;
