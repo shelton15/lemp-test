@@ -14,14 +14,14 @@ const App = () => {
   
       <div>
         {isLoggedIn ? (
-          <Navigate to="/devices" />
+          <Navigate  replace to="/devices" />
         ) : (
           <LoginForm onSuccessLogin={handleSuccessLogin} />
         )}
         <Routes>
-        <Route exact path="/devices">
-          {isLoggedIn ? <DeviceList /> : <Navigate to="/" />}
-        </Route>
+          <Route exact path="/devices">
+            {isLoggedIn ? <DeviceList /> : <Navigate  replace to="/" />}
+          </Route>
         </Routes>
         
       </div>
