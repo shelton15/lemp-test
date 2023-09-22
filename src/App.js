@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import { Route, Navigate, Routes } from 'react-router-dom';
 import LoginForm from './components/LoginForm';
 import DeviceList from './components/DeviceList';
 
@@ -11,19 +11,21 @@ const App = () => {
   };
 
   return (
-    <Router>
+  
       <div>
         {isLoggedIn ? (
-          <Redirect to="/devices" />
+          <Navigate to="/devices" />
         ) : (
           <LoginForm onSuccessLogin={handleSuccessLogin} />
         )}
-
+        <Routes>
         <Route exact path="/devices">
-          {isLoggedIn ? <DeviceList /> : <Redirect to="/" />}
+          {isLoggedIn ? <DeviceList /> : <Navigate to="/" />}
         </Route>
+        </Routes>
+        
       </div>
-    </Router>
+    
   );
 };
 
