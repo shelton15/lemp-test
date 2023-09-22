@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const LoginForm = ({ onLogin, onSuccessLogin }) => {
+const LoginForm = ({ onSuccessLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -19,13 +21,13 @@ const LoginForm = ({ onLogin, onSuccessLogin }) => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log('API response:', data); // Check the entire API response
+        console.log('API response:', data);
 
-        // Extract the token from the response
         if (data.token) {
           const token = data.token;
-          console.log('Extracted token:', token); // Check the extracted token in the console
-          onSuccessLogin(); // Call the onSuccessLogin function
+          console.log('Extracted token:', token);
+          onSuccessLogin();
+          navigate('/devices');
         } else {
           // Handle token not found error
         }
@@ -42,16 +44,10 @@ const LoginForm = ({ onLogin, onSuccessLogin }) => {
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
       <div className="w-full max-w-xs">
-        <form
-          className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-          onSubmit={handleLogin}
-        >
+        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleLogin}>
           <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
           <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="email"
-            >
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
               Email
             </label>
             <input
@@ -65,10 +61,7 @@ const LoginForm = ({ onLogin, onSuccessLogin }) => {
             />
           </div>
           <div className="mb-6">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="password"
-            >
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
               Password
             </label>
             <input
